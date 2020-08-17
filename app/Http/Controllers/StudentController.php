@@ -81,5 +81,29 @@ class StudentController extends Controller
         return redirect('/');
     }
 
+    /**
+     * Show the warning page before deleting the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function delete($id)
+    {
+      $student = Student::find($id);
+      $students = Student::all();
+      return view('student', ['students'=>$students, 'student'=>$student, 'layout'=>'delete']);
+    }
 
+    /**
+     * destroy data of the selected id.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Request $request, $id)
+    {
+      $student = Student::find($id);
+      $student->delete();
+      return redirect('/');
+    }
 }

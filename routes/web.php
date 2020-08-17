@@ -22,3 +22,5 @@ Route::get('/show/{id}',"StudentController@show");
 Route::get('/create',"StudentController@create");
 Route::get('/store',"StudentController@store");
 Route::get('/update/{id}',"StudentController@update");
+Route::get('/delete/{id}',"StudentController@delete");
+Route::get('/destroy/{id}',"StudentController@destroy");

@@ -57,36 +57,10 @@
                                       <input type="text" class="form-control" name="Speciality" placeholder="Enter the speciality">
                                   </div>
                                   <input type="submit" class="btn btn-info" value="save">
-                                  <input type="submit" class="btn btn-warning" value="reset">
+                                  <input type="reset" class="btn btn-warning" value="reset">
                             </form>
                           </div>
                         </div>
-
-                        <form action="{{url('/store')}}" method="get">
-                          @csrf
-                              <div class="form-group">
-                                  <label>CNE</label>
-                                  <input type="text" class="form-control" name="cne" placeholder="Enter CNE">
-                              </div>
-                              <div class="form-group">
-                                  <label>FirstName</label>
-                                  <input type="text" class="form-control" name="firstName" placeholder="Enter the first Name">
-                              </div>
-                              <div class="form-group">
-                                  <label>Last Name</label>
-                                  <input type="text" class="form-control" name="LastName" placeholder="Enter the Last Name">
-                              </div>
-                              <div class="form-group">
-                                  <label>Age</label>
-                                  <input type="text" class="form-control" name="age" placeholder="Enter Age">
-                              </div>
-                              <div class="form-group">
-                                  <label>Speciality</label>
-                                  <input type="text" class="form-control" name="Speciality" placeholder="Enter the speciality">
-                              </div>
-                              <input type="submit" class="btn btn-info" value="save">
-                              <input type="submit" class="btn btn-warning" value="reset">
-                        </form>
         </section>
       </div>
     </div>
@@ -95,40 +69,80 @@
       <div class="row">
         <section class="col md-7">
             @include("studentList")
-        </section>
-        <section class="col md-5">
+          </section>
+          <section class="col md-5">
+            <div class="card mb-3">
+              <img src="https://cdn.pixabay.com/photo/2014/05/05/19/53/keyboard-338502_1280.jpg" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">Enter the corrected information</h5>
+                  <form action="{{url('/update/'.$student->id)}}" method="get">
+                        @csrf
+                        <div class="form-group">
+                        <label>CNE</label>
+                        <input  value="{{ $student->cne }}" type="text" class="form-control" name="cne" readonly>
+                        </div>
+                        <div class="form-group">
+                        <label>FirstName</label>
+                        <input value="{{ $student->firstName }}" type="text" class="form-control" name="firstName"  readonly>
+                        </div>
+                        <div class="form-group">
+                        <label>Last Name</label>
+                        <input value="{{ $student->LastName }}" type="text" class="form-control" name="LastName" placeholder="Enter the Last Name">
+                        </div>
+                        <div class="form-group">
+                        <label>Age</label>
+                        <input value="{{ $student->age }}" type="text" class="form-control" name="age" >
+                        </div>
+                        <div class="form-group">
+                        <label>Speciality</label>
+                        <input value="{{ $student->Speciality }}" type="text" class="form-control" name="Speciality" placeholder="Enter the speciality">
+                        </div>
+                        <input type="submit" class="btn btn-info" value="update">
+                        <input type="reset" class="btn btn-warning" value="reset">
+                      </form>
+                  </div>
+              </div>
+          </section>
+      </div>
+    </div>
+    @elseif($layout=='delete')
+    <div class="container-fluid mt-4">
+      <div class="row">
+        <section class="col md-7">
           <div class="card mb-3">
-            <img src="https://cdn.pixabay.com/photo/2014/05/05/19/53/keyboard-338502_1280.jpg" class="card-img-top" alt="...">
+            <img src="https://cdn.pixabay.com/photo/2013/03/29/13/38/trash-97586_960_720.png" class="card-img-top" style="width:100%; height: 18vw; object-fit:cover;" alt="...">
             <div class="card-body">
-              <h5 class="card-title">Enter the information of new student</h5>
-                <form action="{{url('/update'.$student->id)}}" method="get">
+              <h5 class="card-title">Are you sure you want to delete</h5>
+                <form action="{{url('/destroy/'.$student->id)}}" method="get">
                       @csrf
                       <div class="form-group">
                       <label>CNE</label>
-                      <input  value="{{ $student->cne }}" type="text" class="form-control" name="cne" placeholder="Enter CNE">
+                      <input  value="{{ $student->cne }}" type="text" class="form-control" name="cne"  readonly>
                       </div>
                       <div class="form-group">
                       <label>FirstName</label>
-                      <input value="{{ $student->firstName }}" type="text" class="form-control" name="firstName" placeholder="Enter the first Name">
+                      <input value="{{ $student->firstName }}" type="text" class="form-control" name="firstName"  readonly>
                       </div>
                       <div class="form-group">
                       <label>Last Name</label>
-                      <input value="{{ $student->LastName }}" type="text" class="form-control" name="LastName" placeholder="Enter the Last Name">
+                      <input value="{{ $student->LastName }}" type="text" class="form-control" name="LastName"  readonly>
                       </div>
                       <div class="form-group">
                       <label>Age</label>
-                      <input value="{{ $student->age }}" type="text" class="form-control" name="age" placeholder="Enter Age">
+                      <input value="{{ $student->age }}" type="text" class="form-control" name="age"  readonly>
                       </div>
                       <div class="form-group">
                       <label>Speciality</label>
-                      <input value="{{ $student->Speciality }}" type="text" class="form-control" name="Speciality" placeholder="Enter the speciality">
+                      <input value="{{ $student->Speciality }}" type="text" class="form-control" name="Speciality" placeholder="Enter the speciality"  readonly>
                       </div>
-                      <input type="submit" class="btn btn-info" value="update">
-                      <input type="submit" class="btn btn-warning" value="reset">
+                      <input type="submit" class="btn btn-info" value="yes">
+                      <a href="{{url('/')}}" class="btn btn-warning">Cancel</a>
+                      <!--<input type="reset" class="btn btn-warning" value="no">-->
                     </form>
                 </div>
             </div>
         </section>
+
       </div>
     </div>
     @endif
