@@ -13,10 +13,16 @@
 |
 */
 
-/*Route::get('/', function () {
-    return view('welcome');
-});*/
-Route::get('/',"StudentController@index");
+
+
+Route::get('/',"TeacherController@masterview");
+Route::get('/register',"TeacherController@register");
+Route::get('/signup',"TeacherController@signup");
+Route::get('/login',"TeacherController@login")->name('login');
+Route::get('/logout',"TeacherController@logout");
+Route::post('/authenticate',"TeacherController@authenticate");
+
+
 Route::get('/edit/{id}',"StudentController@edit");
 Route::get('/show/{id}',"StudentController@show");
 Route::get('/create',"StudentController@create");

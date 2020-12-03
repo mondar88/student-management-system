@@ -13,11 +13,17 @@ return [
     |
     */
 
-    'defaults' => [
+
+    /*'defaults' => [
         'guard' => 'web',
         'passwords' => 'users',
-    ],
 
+    ],*/
+
+    'defaults' => [
+        'guard' => 'web',
+        'passwords' => 'teachers',
+      ],
     /*
     |--------------------------------------------------------------------------
     | Authentication Guards
@@ -36,16 +42,18 @@ return [
     */
 
     'guards' => [
+
+        /*A guard key has an array for it’s value and that array has two key-value pairs. First driver and second is provider.*/
         'web' => [
             'driver' => 'session',
-            'provider' => 'users',
+            'provider' => 'teachers',
         ],
 
-        'api' => [
-            'driver' => 'token',
-            'provider' => 'users',
-            'hash' => false,
+        'teacher'  => [
+            'driver' => 'session',
+            'provider' => 'teachers',
         ],
+
     ],
 
     /*
@@ -66,15 +74,17 @@ return [
     */
 
     'providers' => [
-        'users' => [
+
+
+        /*Providers are used to define how our users will be retrieved and how the user data with be stored after authentication.
+        /We are using eloquent so we will define the model that will be used for authentication.
+        */
+        'teachers' => [
             'driver' => 'eloquent',
-            'model' => App\User::class,
+            'model' => App\Teacher::class,
         ],
 
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+
     ],
 
     /*
@@ -93,8 +103,10 @@ return [
     */
 
     'passwords' => [
-        'users' => [
-            'provider' => 'users',
+
+
+        'teachers' => [
+            'provider' => 'teachers',
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,
